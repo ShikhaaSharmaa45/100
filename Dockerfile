@@ -1,13 +1,12 @@
-FROM ubuntu
-RUN apt-get update
-RUN apt-get install -y apache2 \
-  zip \
- unzip
-RUN apt-get install apache2-utils -y
-RUN apt-get clean
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page296/little-fashion.zip /var/www/html/
-WORKDIR /var/www/html
-RUN unzip little-fashion.zip
-RUN cp -rvf 2127_little_fashion/* .
+FROM amazonlinux:latest
+RUN yum update -y && \
+    yum install -y httpd && \
+    yum search wget && \
+    yum install wget -y && \
+    yum install unzip -y
+RUN cd /var/www/html
+RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page293/chocolux.zip 
+RUN unzip chocolux.zip
+RUN cp -r chocolux-html/* /var/www/html
 EXPOSE 80
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]
