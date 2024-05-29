@@ -11,12 +11,12 @@ pipeline{
           environment {
               DOCKER_IMAGE = "shikha1818/$JOB_NAME.$BUILD_ID"
               // DOCKERFILE_LOCATION = "Dockerfile"
-              DOCKERHUB_CREDENTIALS = credentials('shikha1818')
+            
           }
           steps{
               script{
                   sh 'docker image build -t ${DOCKER_IMAGE} .'
-                  sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -S --password-stdin'
+                  sh 'docker login -u shikha1818 -p shikha18nov'
                   sh 'docker image push ${DOCKER_IMAGE}'
                   sh 'docker container run -it -d -p 9000:80 ${DOCKER_IMAGE}'
               }
