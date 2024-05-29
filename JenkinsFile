@@ -11,12 +11,12 @@ pipeline{
           environment {
               DOCKER_IMAGE = "shikha1818/$JOB_NAME.$BUILD_ID"
               // DOCKERFILE_LOCATION = "Dockerfile"
-              REGISTRY_CREDENTIALS = credentials('shikha1818')
+              DOCKERHUBPASSWORD = "shikha18nov"
           }
           steps{
               script{
                   sh 'docker image build -t ${DOCKER_IMAGE} .'
-                  sh 'docker login -u shikha1818 -p ${shikha1818}'
+                  sh 'docker login -u shikha1818 -p ${DOCKERHUBPASSWORD}'
                   sh 'docker image push ${DOCKER_IMAGE}'
               }
           }
