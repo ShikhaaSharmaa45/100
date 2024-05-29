@@ -13,6 +13,11 @@ pipeline{
                // DOCKERFILE_LOCATION = "Dockerfile"
                REGISTRY_CREDENTIALS = credentials('shikha1818')
            }
+           steps{
+               script{
+                   sh 'docker build -t ${DOCKER_IMAGE} .'
+               }
+           }
        }
     }
 }
