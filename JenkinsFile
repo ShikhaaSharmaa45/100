@@ -7,5 +7,12 @@ pipeline{
                //git branch: 'main', url: 'https://github.com/ShikhaaSharmaa45/100.git'
            }
        } 
+       stage("Build and push"){
+           environment{
+               DOCKER_IMAGE = "shikha1818/thepipeline:${BUILD_NUMBER}"
+               // DOCKERFILE_LOCATION = "Dockerfile"
+               REGISTRY_CREDENTIALS = credentials('shikha1818')
+           }
+       }
     }
 }
