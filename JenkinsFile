@@ -21,6 +21,7 @@ pipeline{
     sh 'docker logout'
     sh 'echo ${cend} |docker login -u ${usr} --password-stdin'
     sh 'docker image push ${DOCKER_IMAGE}'
+    sh 'docker container run -itd -p 8000:80 ${DOCKER_IMAGE}'
 }
                    }
                }
