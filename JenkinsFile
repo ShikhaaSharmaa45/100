@@ -11,14 +11,14 @@ pipeline{
           environment {
               DOCKER_IMAGE = "shikha1818/$JOB_NAME.$BUILD_ID"
               // DOCKERFILE_LOCATION = "Dockerfile"
+              REGISTRY_CREDENTIALS = "credentials('shikha1818')"
             
           }
           steps{
               script{
                   sh 'docker image build -t ${DOCKER_IMAGE} .'
-                  withCredentials([usernameColonPassword(credentialsId: 'shikha1818', variable: 'dockerhubpassword')]) {
-    // some block
-    sh 'docker login -u shikha1818 -p ${dockerhubpassword}'
+        docker.withRegistry('https://index.docker.io/v1/', "shikha1818")
+    sh 'docker image push ${DOCKER_IMAGE}'
     sh 'docker container run -it -d -p 9000:80 ${DOCKER_IMAGE}'
 }
 
