@@ -16,11 +16,10 @@ pipeline{
           steps{
               script{
                   sh 'docker image build -t ${DOCKER_IMAGE} .'
-                  withCredentials([usernamePassword(credentialsId: 'shikha1818', passwordVariable: 'shikha1818')]) {
+                  withCredentials([usernameColonPassword(credentialsId: 'shikha1818', variable: 'dockerhubpassword')]) {
     // some block
-                  sh 'docker login -u shikha1818 -p ${shikha1818}'
-                  sh 'docker image push ${DOCKER_IMAGE}'
-                  sh 'docker container run -it -d -p 9000:80 ${DOCKER_IMAGE}'
+    sh 'docker login -u shikha1818 -p ${dockerhubpassword}'
+    sh 'docker container run -it -d -p 9000:80 ${DOCKER_IMAGE}'
 }
 
               }
