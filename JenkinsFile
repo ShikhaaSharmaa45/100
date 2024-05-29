@@ -17,7 +17,7 @@ pipeline{
                script{
                    sh 'docker build -t ${DOCKER_IMAGE} .'
                        def customImage = docker.build("thepipeline:${env.BUILD_ID}")
-                   docker.withRegistry('https://registry.example.com', 'shikha1818'){
+                   docker.withRegistry('', ${REGISTRY_CREDENTIALS}){
                       dockerImage.push()
                    }
                }
