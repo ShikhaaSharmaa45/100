@@ -19,7 +19,7 @@ pipeline{
                    withCredentials([usernamePassword(credentialsId: 'shikha1818', passwordVariable: 'cend', usernameVariable: 'usr')]) {
     // some block
     sh 'docker logout'
-    sh 'echo ${cend} | docker login -u ${usr --password-stdin}'
+    sh 'echo ${cend} |docker login -u ${usr} --password-stdin'
     sh 'docker image push ${DOCKER_IMAGE}'
 }
                    }
