@@ -1,0 +1,11 @@
+pipeline{
+    agent any 
+    stages{
+      stage("Source code Pull from Github"){
+          steps{
+              sh 'echo passed'
+      //git branch: 'main', url: 'https://github.com/ShikhaaSharmaa45/100.git'
+          }
+      } 
+    }
+}
