@@ -1,30 +1,22 @@
-pipeline{
-    agent any
-    stages{
-        stage("Source Code pull FRom Github"){
-            steps{
-                sh "echo success"
-                //git branch: 'main', url: 'https://github.com/ShikhaaSharmaa45/100.git' 
-            }
+pipeline {
+  agent any
+  stages {
+
+    stage('Stage 1') {
+      steps {
+        script {
+          echo 'Stage 1'
         }
-        stage("Build Docker File and push to Dockerhub"){
-            environment{
-                DOCKER_IMAGE = "shikha1818/$JOB_NAME.$BUILD_ID"
-                // DOCKERFILE_LOCATION = "Dockerfile"
-                REGISTRY_CREDENTIALS = credentials('shikha1818')
-            }
-            steps{
-                script{
-                    sh 'docker image build -t ${DOCKER_IMAGE} .'
-                    withCredentials([usernamePassword(credentialsId: 'shikha1818', passwordVariable: 'hub', usernameVariable: 'docker')]) {
-    // some block
-    sh 'docker logout'
-    sh 'echo ${hub} | docker login -u ${docker} --password-stdin '
-    sh 'docker image push ${DOCKER_IMAGE}'
-    sh 'docker container run -itd -p 7000:80 ${DOCKER_IMAGE}'
-}
-                }
-            }
-        }
+      }
     }
+
+    stage('Stage 2') {
+      steps {
+        script {
+          echo 'Stage 2'
+        }
+      }
+    }
+
+  }
 }
